@@ -1,0 +1,262 @@
+:root{
+    --primary-color: #ee4d2d;
+    --white-color: #fff;
+    --back-color: #000;
+    --text-color: #333;
+    --border-color: #dbdbdb;
+    --star-gold-color: #FFCE3E;
+
+    --header-height: 120px;
+    --navbar-height: 38px;
+    --header-with-search-height: calc(var(--header-height) - var(--navbar-height));
+    --header-sort-bar-height: 46px; 
+}
+
+*{
+    box-sizing: inherit;
+}
+
+html{
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    box-sizing: border-box;
+    /* gg roboto font >>copy */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* responsive */
+
+.grid__row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+/* test */
+
+.grid__column-2-12{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 16.667%;
+}
+
+.grid__column-10-12{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 83.333%;
+}
+
+.grid__column-2-10{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 20%;
+}
+
+/* animation */
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes growth{
+    /* growth từ kích thước --growth-from đến --growth-to */
+
+    from{
+        opacity: 0; /* hiện mờ mờ lên */
+        transform: scale(var(--growth-from));
+    }
+    to{
+        opacity: 1;
+        transform: scale(var(--growth-to));
+    }
+}
+
+/* modal */
+.modal{
+    /* modal phụ thuộc khung trình duyệt */
+    position: fixed;
+    /* modal chiếm hết chiều ngang dọc khung trình duyệt */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+
+    animation: fadeIn linear 0.1s;
+}
+
+.modal__overlay{
+    /* lấy modal làm gốc, chiếm full thẻ chứa nó */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+.modal-body{
+    /* 1 element nằm chính giữa modal(flex), khác css ở thẻ cha justify-content: center là all element */
+    margin: auto;
+
+    /* kích thước css ở auth-form vì class này dùng chung!? */
+    /* width: 500px; */
+
+    /* bỏ k css chung>>làm riêng ở main.css */
+    /* background-color: var(--white-color);
+    border-radius: 5px; */
+
+    /* overlay có position>> nằm trên, box of modal-body nằm dưới */
+    /* chuyển modal-body nằm tầng trên, cao hơn overlay>>nào z-index cao hơn thì nằm trên. mặc định=0 */
+    z-index: 1;
+    /* position: relative; cả 2 đều có position>>cùng cấp>>html cái nào ghi sau thì ở tầng trên>>k tối ưu*/
+
+
+    /* đặt biến local cho biến of animation growth */
+    /* growth từ kích thước 60% đến 100% */
+    --growth-from: 0.6;
+    --growth-to: 1;
+    animation: growth ease-in 0.1s;
+}
+
+/* btn style */
+.btn{
+    min-width: 124px;
+    height: 34px;
+    font-size: 1.4rem;
+    /* phòng khi font-size số lẻ thì bị lệch trên dưới so vs khung btn>>cho line-height số chẵn */
+    line-height: 1.6rem;
+
+    border: none;
+    border-radius: 2px;
+    background-color: var(--white-color);
+    /* phòng TH of thẻ a */
+    text-decoration: none;
+    /* chữ bị lệch trên dưới, k chính giữa padding top,botom=0*/
+    padding: 0 12px;
+    /* bấm vào có outline màu xanh?? */
+    /* outline: none; */
+
+    cursor: pointer;
+    color: var(--text-color);
+
+    /* phần socials kết nối vs fb, gg chữ bị lệch trên dưới so vs ô */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn.btn--normal:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+}
+/* css những thẻ có cả 2 class này */
+.btn.btn--size-s{
+    height: 32px;
+    font-size: 1.2rem;
+    padding: 0 8px;
+}
+
+.btn.btn--primary{
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+
+.btn.btn--disable{
+    /* giảm độ sáng */
+    filter: brightness(0.7);
+    color: #949494;
+    background-color: #c3c3c3;
+}
+
+/* selection */
+.select-input{
+    position: relative;
+    min-width: 200px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 2px;
+    background-color: var(--white-color);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.select-input:hover .select-input__list{
+    display: block;
+}
+
+.select-input__list{
+    position: absolute;
+    top: calc(100% - 12px);
+    left: 0;
+    right: 0;
+    list-style-type: none;
+    padding: 6px 0;
+    background-color: var(--white-color);
+    
+    animation: fadeIn ease-in 0.2s;
+    display: none;
+    z-index: 1;
+}
+
+.select-input__item{
+
+}
+
+.select-input__link{
+    font-size: 1.4rem;
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    padding: 8px 16px;
+}
+
+.select-input__link:hover{
+    color: var(--primary-color);
+}
+
+/* pagination */
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.pagination-item{
+    margin: 0 10px;
+}
+
+.pagination-item--active .pagination-item__link{
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+
+.pagination-item--active .pagination-item__link:hover{
+    background-color: #ed5c3f;
+}
+
+.pagination-item__link{
+    --height: 30px;
+    display: block;
+    min-width: 40px;
+    height: var(--height);
+    text-align: center;
+    line-height: var(--height);
+
+    text-decoration: none;
+    font-size: 1.6rem;
+    color: #939393;
+    border-radius: 2px;
+}
+
+.pagination-item__icon{
+}
